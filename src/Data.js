@@ -32,6 +32,7 @@ export default function Data() {
         getLoc()
         runDegreeConversion()
         //fires get loc on form submit- undefined
+        // notes
     }
 
     const updateSearch = event => {
