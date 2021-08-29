@@ -93,7 +93,8 @@ export default function Data() {
                   <div
                     className="Rotate-circle"
                     style={{
-                        animation: 'app-logo-spin infinite spin ease',
+                        // animation: 'app-logo-spin infinite spin ease',
+                        transition: 'all 1s ease',
                         width:  '1em',
                         height: '1em', 
                         background: 'red',
