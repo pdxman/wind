@@ -11,22 +11,18 @@ export default function Data() {
     
     useEffect(() => {
        getLoc()
-    //    console.log("loc inside useEffect: ", loc)
     }, [])
 
     const getLoc = () => {
         axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${loc}&appid=${key}`)
         .then(response => {
-            // console.log(response.data.wind)
             setWeatherData(response.data.wind)
             setname(response.data.name)
-            // console.log("the name: ", {name})
         })
     }
 
     const runDegreeConversion = () => {
         var conversionResult = degToCompass(weatherData.deg);
-        //console.log("wind direction ", conversionResult)
         setDirection(conversionResult)
     }
 
@@ -35,13 +31,10 @@ export default function Data() {
         event.persist();
         getLoc()
         runDegreeConversion()
-        //fires get loc on form submit- undefined
-        // notes
     }
 
     const updateSearch = event => {
         setLoc(event.target.value)
-        //sets loc state from input 
     }
 
     function degToCompass(num){ 
@@ -56,10 +49,6 @@ export default function Data() {
     const windSpeed = false
     const windGust = weatherData.deg
 
-    // const updateDirection = () => {
-    //     console.log('updated direction')
-    // }
-
     if(weatherData.deg < 180) {
         console.log(weatherData.deg, 'less than 180')
     } else {
@@ -73,10 +62,10 @@ export default function Data() {
                 <input 
                     type="text"
                     onChange={updateSearch}
+                    placeholder="Search for Location"
                 />
                 <button type="submit">Search</button> 
               </form>  
-              <p><strong>Current Search Location:</strong> {name}</p>
               <p><strong>Wind Speed:</strong> {weatherData.speed}</p>   
               <p><strong>Wind Direction(degrees):</strong> {weatherData.deg}</p> 
               <p><strong>Wind Gust:</strong> {weatherData.gust}</p>   
@@ -85,7 +74,7 @@ export default function Data() {
               <div style={{
                   width:  '4em',
                   height: '4em', 
-                  background: 'green',
+                  background: '#003366',
                   borderRadius: '50%',
                   margin: '5em auto',
                   position: 'relative'
@@ -97,13 +86,11 @@ export default function Data() {
                         transition: 'all 1s ease',
                         width:  '1em',
                         height: '1em', 
-                        background: 'red',
+                        background: 'grey',
                         borderRadius: '50%',
                         position: 'absolute',
                         top: weatherData.deg < 180 ? '50px' : '10px',
                         left: '5px'
-                        
-                        // transform: windSpeed ? 'rotate(0deg) translateX(36px) rotate(0deg)' : 'rotate(-45deg)' 
                     }}>
                 </div>
               </div>

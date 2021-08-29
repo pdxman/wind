@@ -4,7 +4,7 @@ import Data from './Data'
 function App() {
   return (
     <div className="App">
-     <h1>It's Windy out there, folks!!</h1>
+     <h1>WIND</h1>
      <Data />
     </div>
   );
