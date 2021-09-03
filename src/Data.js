@@ -11,6 +11,7 @@ export default function Data() {
     
     useEffect(() => {
        getLoc()
+       
     }, [])
 
     const getLoc = () => {
@@ -31,6 +32,22 @@ export default function Data() {
         event.persist();
         getLoc()
         runDegreeConversion()
+        setWindPosition()
+    }
+
+    const windDir = weatherData.deg
+
+    const setWindPosition = (winDir) => {
+        switch(winDir) {
+            case winDir < 180: 
+                console.log('less then 180')
+            break;
+            case winDir > 180: 
+                console.log('less then 180')
+            break;
+            default:
+                console.log('default')
+        }
     }
 
     const updateSearch = event => {
