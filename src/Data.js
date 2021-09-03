@@ -40,10 +40,10 @@ export default function Data() {
     const setWindPosition = (winDir) => {
         switch(winDir) {
             case winDir < 180: 
-                console.log('less then 180')
+                console.log('less than 180')
             break;
             case winDir > 180: 
-                console.log('less then 180')
+                console.log('more than 180')
             break;
             default:
                 console.log('default')
