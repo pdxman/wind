@@ -6,6 +6,8 @@ body{
 
 h1 { letter-spacing: 13px ;}
 
+::placeholder{ color:#003366;}
+
 button { 
   background:#003366 ;
   color: #fff; 
@@ -51,6 +53,15 @@ input{
 
 .App-link {
   color: #61dafb;
+}
+
+.circle-large {
+  width:  4em;
+  height: 4em;
+  background: #003366;
+  border-radius: 50%;
+  margin: 5em auto;
+  position: relative;
 }
 
 @keyframes App-logo-spin {
