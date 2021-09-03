@@ -36,13 +36,13 @@ export default function Data() {
     }
 
     const windDir = weatherData.deg
-
-    const setWindPosition = (winDir) => {
-        switch(winDir) {
-            case winDir < 180: 
+   
+    const setWindPosition = (windDir) => {
+        switch(windDir) {
+            case windDir < 180: 
                 console.log('less than 180')
             break;
-            case winDir > 180: 
+            case windDir > 180: 
                 console.log('more than 180')
             break;
             default:
