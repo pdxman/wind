@@ -47,22 +47,22 @@ export default function Data() {
                 console.log('SW')
             break;
             case "SE": 
-            console.log('SE')
+                console.log('SE')
             break;
             case "NE": 
-            console.log('NE')
+                console.log('NE')
             break;
             case "S": 
-            console.log('S')
+                console.log('S')
             break;
             case "N": 
-            console.log('N')
+                console.log('N')
             break;
             case "E": 
-            console.log('E')
+                console.log('E')
             break;
             case "W": 
-            console.log('W')
+                console.log('W')
             break;
             default:
                 console.log('default')
