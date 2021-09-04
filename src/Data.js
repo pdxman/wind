@@ -32,23 +32,24 @@ export default function Data() {
         event.persist();
         getLoc()
         runDegreeConversion()
-        setWindPosition()
+        // setWindPosition()
     }
 
-    const windDir = weatherData.deg
+    // const windDir = weatherData.deg
+    const windDir = 0
    
-    const setWindPosition = (windDir) => {
+    
         switch(windDir) {
-            case windDir < 180: 
-                console.log('less than 180')
+            case 2 : 
+                console.log('less than 3')
             break;
-            case windDir > 180: 
-                console.log('more than 180')
+            case 3: 
+                console.log('more than 3')
             break;
             default:
                 console.log('default')
         }
-    }
+    
 
     const updateSearch = event => {
         setLoc(event.target.value)
