@@ -38,31 +38,39 @@ export default function Data() {
     const windDir = direction
     //const windDir = 0
    
-    
+    let top;
         switch(windDir) {
             case "NW" : 
                 console.log('NW')
+                top = '130px'    
             break;
             case "SW": 
                 console.log('SW')
+                top = '120px'
             break;
             case "SE": 
                 console.log('SE')
+                top = '110px'
             break;
             case "NE": 
                 console.log('NE')
+                top = '10px'
             break;
             case "S": 
                 console.log('S')
+                top = '-110px'
             break;
             case "N": 
                 console.log('N')
+                top = '-120px'
             break;
             case "E": 
                 console.log('E')
+                top = '-130px'
             break;
             case "W": 
                 console.log('W')
+                top = '-140px'
             break;
             default:
                 console.log('default')
@@ -89,7 +97,8 @@ export default function Data() {
         background: 'grey',
         borderRadius: '50%',
         position: 'absolute',
-        top: weatherData.deg < 180 ? '50px' : '10px',
+        //top: weatherData.deg < 180 ? '50px' : '10px',
+        top:  top ,
         left: '5px' }
        
     return(
