@@ -35,16 +35,34 @@ export default function Data() {
         // setWindPosition()
     }
 
-    // const windDir = weatherData.deg
-    const windDir = 0
+    const windDir = direction
+    //const windDir = 0
    
     
         switch(windDir) {
-            case 2 : 
-                console.log('less than 3')
+            case "NW" : 
+                console.log('NW')
             break;
-            case 3: 
-                console.log('more than 3')
+            case "SW": 
+                console.log('SW')
+            break;
+            case "SE": 
+            console.log('SE')
+            break;
+            case "NE": 
+            console.log('NE')
+            break;
+            case "S": 
+            console.log('S')
+            break;
+            case "N": 
+            console.log('N')
+            break;
+            case "E": 
+            console.log('E')
+            break;
+            case "W": 
+            console.log('W')
             break;
             default:
                 console.log('default')
