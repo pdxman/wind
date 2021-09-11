@@ -8,11 +8,12 @@ export default function Data() {
     const [loc, setLoc] = useState('new york')
     const [direction, setDirection] = useState('')
     const [name, setname] = useState('new york')
-    
+    const [locFound, setLocFound] = useState(true)
+   
     useEffect(() => {
        getLoc()
        
-    }, [])
+    }, [locFound])
 
     const getLoc = () => {
         axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${loc}&appid=${key}`)
@@ -20,8 +21,19 @@ export default function Data() {
             setWeatherData(response.data.wind)
             setname(response.data.name)
         })
+        
+        .catch(err => {
+            if(err.response.data.cod === '404'){
+                setLocFound(false)
+                console.log('its a 404 ', locFound)
+            } else if(err.request) {
+                console.log('error request:', err)
+            } else {
+                console.log('nothing', err)        
+            }
+        })
     }
-
+    
     const runDegreeConversion = () => {
         var conversionResult = degToCompass(weatherData.deg);
         setDirection(conversionResult)
@@ -39,38 +51,62 @@ export default function Data() {
     //const windDir = 0
    
     let top;
+    let left; 
         switch(windDir) {
+            case "ESE" : 
+                top = '47px'
+                left = '46px'   
+            break;
+            case "ENE" : 
+                top = '4px'
+                left = '46px'   
+            break;
+            case "WSW": 
+                top = '36px'
+                left = '-4px'
+            break;
+            case "SSW": 
+                top = '54px'
+                left = '16px'
+            break;
+            case "NNW": 
+                top = '2.5px'
+            break;
+            case "NNE": 
+                top = '-4px'
+                left = '36px'
+            break;
             case "NW" : 
-                console.log('NW')
-                top = '130px'    
+                top = '0px'
+                left = '13px'    
             break;
             case "SW": 
-                console.log('SW')
-                top = '120px'
+                top = '46px'
+                left ='5px'
             break;
             case "SE": 
-                console.log('SE')
-                top = '110px'
+                top = '48px'
+                left = '48px'
             break;
             case "NE": 
-                console.log('NE')
-                top = '10px'
+                top = '1px'
+                left = '44px'
             break;
             case "S": 
-                console.log('S')
-                top = '-110px'
+                top = '50px'
+                left = '23px'
             break;
             case "N": 
-                console.log('N')
-                top = '-120px'
+                top = '-6.5px'
+                left = '23px'
             break;
             case "E": 
-                console.log('E')
-                top = '-130px'
+                top = '23px'
+                left = '54px'
             break;
             case "W": 
-                console.log('W')
-                top = '-140px'
+                top = '23px'
+                left = '-7.5px'
             break;
             default:
                 console.log('default')
@@ -95,11 +131,12 @@ export default function Data() {
         width:  '1em',
         height: '1em', 
         background: 'grey',
+        //background: 'url(./arrow-right-circle.svg)',
         borderRadius: '50%',
         position: 'absolute',
         //top: weatherData.deg < 180 ? '50px' : '10px',
         top:  top ,
-        left: '5px' }
+        left: left }
        
     return(
         <div>
@@ -112,6 +149,7 @@ export default function Data() {
                 />
                 <button type="submit">SEARCH</button> 
             </form> 
+              <p>{locFound ? 'loc was found' : 'loc was not found'}</p>
               <p><strong>Wind Speed:</strong> {weatherData.speed}</p>   
               <p><strong>Wind Direction(degrees):</strong> {weatherData.deg}</p> 
               <p><strong>Wind Gust:</strong> {weatherData.gust}</p>   
@@ -121,6 +159,7 @@ export default function Data() {
                     className="Rotate-circle" 
                     style={circleStyle}
                   >
+                      {/* <img src="arrow-right-circle.svg" /> */}
                 </div>
               </div>
         </div>
