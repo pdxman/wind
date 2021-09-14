@@ -44,12 +44,10 @@ export default function Data() {
         event.persist();
         getLoc()
         runDegreeConversion()
-        // setWindPosition()
-    }
+     }
 
     const windDir = direction
-    //const windDir = 0
-   
+    
     let top;
     let left; 
         switch(windDir) {
@@ -131,37 +129,30 @@ export default function Data() {
         width:  '1em',
         height: '1em', 
         background: 'grey',
-        //background: 'url(./arrow-right-circle.svg)',
         borderRadius: '50%',
         position: 'absolute',
-        //top: weatherData.deg < 180 ? '50px' : '10px',
         top:  top ,
         left: left }
        
-    return(
-        <div>
-            <p>Wind Data for {name}</p>
-            <form onSubmit={handleSearch}>
-                <input 
-                    type="text"
-                    onChange={updateSearch}
-                    placeholder="Search for Location"
-                />
-                <button type="submit">SEARCH</button> 
-            </form> 
-              <p>{locFound ? 'loc was found' : 'loc was not found'}</p>
-              <p><strong>Wind Speed:</strong> {weatherData.speed}</p>   
-              <p><strong>Wind Direction(degrees):</strong> {weatherData.deg}</p> 
-              <p><strong>Wind Gust:</strong> {weatherData.gust}</p>   
-              <p><strong>Wind Direction(Compass):</strong> {direction}</p>
-              <div className="circle-large">
-                  <div
-                    className="Rotate-circle" 
-                    style={circleStyle}
-                  >
-                      {/* <img src="arrow-right-circle.svg" /> */}
-                </div>
-              </div>
-        </div>
-    )
+    return(<div>
+             <div>
+                <p>Wind Data for {name}</p>
+                <form onSubmit={handleSearch}>
+                    <input 
+                        type="text"
+                        onChange={updateSearch}
+                        placeholder="Search for Location"
+                    />
+                    <button type="submit">SEARCH</button> 
+                </form> 
+               </div> 
+               <div>
+                    <p>{!locFound ? 'loc was not found' : ''}</p>
+                    <p><strong>Wind Speed:</strong> {weatherData.speed}</p>   
+                    <p><strong>Wind Direction(degrees):</strong> {weatherData.deg}</p> 
+                    <p><strong>Wind Gust:</strong> {weatherData.gust}</p>   
+                    <p><strong>Wind Direction(Compass):</strong> {direction}</p>
+                </div>    
+              <div className="circle-large"><div className="Rotate-circle"  style={circleStyle} ></div></div>
+        </div>)
 }
