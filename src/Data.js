@@ -48,67 +48,116 @@ export default function Data() {
 
     const windDir = direction
     
-    let top;
-    let left; 
+    // let top;
+    // let left; 
+    //     switch(windDir) {
+    //         case "ESE" : 
+    //             top = '47px'
+    //             left = '46px'   
+    //         break;
+    //         case "ENE" : 
+    //             top = '4px'
+    //             left = '46px'   
+    //         break;
+    //         case "WSW": 
+    //             top = '36px'
+    //             left = '-4px'
+    //         break;
+    //         case "SSW": 
+    //             top = '54px'
+    //             left = '16px'
+    //         break;
+    //         case "NNW": 
+    //             top = '2.5px'
+    //         break;
+    //         case "NNE": 
+    //             top = '-4px'
+    //             left = '36px'
+    //         break;
+    //         case "NW" : 
+    //             top = '0px'
+    //             left = '13px'    
+    //         break;
+    //         case "SW": 
+    //             top = '46px'
+    //             left ='5px'
+    //         break;
+    //         case "SE": 
+    //             top = '48px'
+    //             left = '48px'
+    //         break;
+    //         case "NE": 
+    //             top = '1px'
+    //             left = '44px'
+    //         break;
+    //         case "S": 
+    //             top = '50px'
+    //             left = '23px'
+    //         break;
+    //         case "N": 
+    //             top = '-6.5px'
+    //             left = '23px'
+    //         break;
+    //         case "E": 
+    //             top = '23px'
+    //             left = '54px'
+    //         break;
+    //         case "W": 
+    //             // transform = 'translate(23px, -7.5px)'
+    //             top = '23px'
+    //             left = '-7.5px'
+    //         break;
+    //         default:
+    //             console.log('default')
+    //     }
+
+     let transform;
         switch(windDir) {
             case "ESE" : 
-                top = '47px'
-                left = '46px'   
+                transform = 'translate(47px, 46px)'  
             break;
             case "ENE" : 
-                top = '4px'
-                left = '46px'   
+                transform = 'translate(4px, 46px)' 
             break;
             case "WSW": 
-                top = '36px'
-                left = '-4px'
+                transform = 'translate(36px, -4px)' 
             break;
             case "SSW": 
-                top = '54px'
-                left = '16px'
+                transform = 'translate(54px, 16px)' 
             break;
             case "NNW": 
-                top = '2.5px'
+                transform = 'translateX(2.5px)' 
             break;
             case "NNE": 
-                top = '-4px'
-                left = '36px'
+                transform = 'translate(-4px, 36px)' 
             break;
             case "NW" : 
-                top = '0px'
-                left = '13px'    
+                  transform = 'translate(0px, 13px)'  
             break;
             case "SW": 
-                top = '46px'
-                left ='5px'
+                transform = 'translate(46px, 5px)' 
             break;
             case "SE": 
-                top = '48px'
-                left = '48px'
+                transform = 'translate(48px, 48px)' 
             break;
             case "NE": 
-                top = '1px'
-                left = '44px'
+               transform = 'translate(47px, 46px)' 
             break;
             case "S": 
-                top = '50px'
-                left = '23px'
+                transform = 'translate(50px, 23px)' 
             break;
             case "N": 
-                top = '-6.5px'
-                left = '23px'
+                transform = 'translate(-6.5px, 23px)' 
             break;
             case "E": 
-                top = '23px'
-                left = '54px'
+                transform = 'translate(23px, 54px)' 
             break;
             case "W": 
-                top = '23px'
-                left = '-7.5px'
+                transform = 'translate(23px, -7.5px)'
             break;
             default:
                 console.log('default')
-        }
+        }    
     
 
     const updateSearch = event => {
@@ -131,8 +180,11 @@ export default function Data() {
         background: 'grey',
         borderRadius: '50%',
         position: 'absolute',
-        top:  top ,
-        left: left }
+        transform: transform, 
+        transformOrigin: '50px'
+        // top:  top ,
+        // left: left
+    }
        
     return(<div>
              <div>
