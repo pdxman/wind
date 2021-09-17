@@ -44,73 +44,61 @@ export default function Data() {
         event.persist();
         getLoc()
         runDegreeConversion()
-        // setWindPosition()
-    }
+     }
 
     const windDir = direction
-    //const windDir = 0
-   
-    let top;
-    let left; 
+    
+    
+     let transform;
         switch(windDir) {
             case "ESE" : 
-                top = '47px'
-                left = '46px'   
+                transform = 'translate(47px, 46px)'  
             break;
             case "ENE" : 
-                top = '4px'
-                left = '46px'   
+                transform = 'translate(51px, 16px)' 
             break;
             case "WSW": 
-                top = '36px'
-                left = '-4px'
+                transform = 'translate(-2px, 38px)' 
+            break;
+            case "SSE" : 
+                transform = 'translate((35px, 50px)'  
             break;
             case "SSW": 
-                top = '54px'
-                left = '16px'
+                transform = 'translate(15px, 50px)' 
             break;
             case "NNW": 
-                top = '2.5px'
+                transform = 'translate(15px, -3px)' 
             break;
             case "NNE": 
-                top = '-4px'
-                left = '36px'
+                transform = 'translate(-4px, 36px)' 
             break;
             case "NW" : 
-                top = '0px'
-                left = '13px'    
+                  transform = 'translate(0px, 5px)'  
             break;
             case "SW": 
-                top = '46px'
-                left ='5px'
+                transform = 'translate(0px, 45px)' 
             break;
             case "SE": 
-                top = '48px'
-                left = '48px'
+                transform = 'translate(48px, 48px)' 
             break;
             case "NE": 
-                top = '1px'
-                left = '44px'
+               transform = 'translate(47px, 5px)' 
             break;
             case "S": 
-                top = '50px'
-                left = '23px'
+                transform = 'translate(25px, 55px)' 
             break;
             case "N": 
-                top = '-6.5px'
-                left = '23px'
+                transform = 'translate(23px, -7.5px)' 
             break;
             case "E": 
-                top = '23px'
-                left = '54px'
+                transform = 'translate(55px, 25px)' 
             break;
             case "W": 
-                top = '23px'
-                left = '-7.5px'
+                transform = 'translate(-5px, 25px))'
             break;
             default:
                 console.log('default')
-        }
+        }    
     
 
     const updateSearch = event => {
@@ -131,37 +119,33 @@ export default function Data() {
         width:  '1em',
         height: '1em', 
         background: 'grey',
-        //background: 'url(./arrow-right-circle.svg)',
         borderRadius: '50%',
         position: 'absolute',
-        //top: weatherData.deg < 180 ? '50px' : '10px',
-        top:  top ,
-        left: left }
+        transform: transform, 
+        transformOrigin: 'top left'
+        // top:  top ,
+        // left: left
+    }
        
-    return(
-        <div>
-            <p>Wind Data for {name}</p>
-            <form onSubmit={handleSearch}>
-                <input 
-                    type="text"
-                    onChange={updateSearch}
-                    placeholder="Search for Location"
-                />
-                <button type="submit">SEARCH</button> 
-            </form> 
-              <p>{locFound ? 'loc was found' : 'loc was not found'}</p>
-              <p><strong>Wind Speed:</strong> {weatherData.speed}</p>   
-              <p><strong>Wind Direction(degrees):</strong> {weatherData.deg}</p> 
-              <p><strong>Wind Gust:</strong> {weatherData.gust}</p>   
-              <p><strong>Wind Direction(Compass):</strong> {direction}</p>
-              <div className="circle-large">
-                  <div
-                    className="Rotate-circle" 
-                    style={circleStyle}
-                  >
-                      {/* <img src="arrow-right-circle.svg" /> */}
-                </div>
-              </div>
-        </div>
-    )
+    return(<div>
+             <div>
+                <p>Wind Data for {name}</p>
+                <form onSubmit={handleSearch}>
+                    <input 
+                        type="text"
+                        onChange={updateSearch}
+                        placeholder="Search for Location"
+                    />
+                    <button type="submit">SEARCH</button> 
+                </form> 
+               </div> 
+               <div>
+                    <p>{!locFound ? 'loc was not found' : ''}</p>
+                    <p><strong>Wind Speed:</strong> {weatherData.speed}</p>   
+                    <p><strong>Wind Direction(degrees):</strong> {weatherData.deg}</p> 
+                    <p><strong>Wind Gust:</strong> {weatherData.gust}</p>   
+                    <p><strong>Wind Direction(Compass):</strong> {direction}</p>
+                </div>    
+              <div className="circle-large"><div className="Rotate-circle"  style={circleStyle} ></div></div>
+        </div>)
 }
