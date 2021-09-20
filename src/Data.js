@@ -1,25 +1,29 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 
+
 const key = process.env.REACT_APP_API_KEY
 
 export default function Data() {
     const [weatherData, setWeatherData] = useState([])  
     const [loc, setLoc] = useState('new york')
-    const [direction, setDirection] = useState('')
-    const [name, setname] = useState('new york')
+    const [direction, setDirection] = useState('dir')
+    const [name, setName] = useState('new york')
     const [locFound, setLocFound] = useState(true)
+    
    
     useEffect(() => {
-       getLoc()
+        getLoc()
        
     }, [locFound])
+
+    // console.log('Test Data: ', testLoc)
 
     const getLoc = () => {
         axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${loc}&appid=${key}`)
         .then(response => {
             setWeatherData(response.data.wind)
-            setname(response.data.name)
+            setName(response.data.name)
         })
         
         .catch(err => {
@@ -32,22 +36,38 @@ export default function Data() {
                 console.log('nothing', err)        
             }
         })
+
+        
     }
     
-    const runDegreeConversion = () => {
-        var conversionResult = degToCompass(weatherData.deg);
-        setDirection(conversionResult)
-    }
-
     const handleSearch = event => {
         event.preventDefault();
         event.persist();
         getLoc()
         runDegreeConversion()
+        
      }
+ 
+    const runDegreeConversion = () => {
+        function degToCompass(num){ 
+            while( num < 0 ) num += 360 ;
+            while( num >= 360 ) num -= 360 ; 
+            var val = Math.round( (num -11.25 ) / 22.5 ) ;
+            var arr = ["NNE","NE","ENE","E","ESE", "SE", 
+                  "SSE","S","SSW","SW","WSW","W","WNW","NW","NNW", "N",] ;
+            return arr[ Math.abs(val) ] ;
+        }
 
-    const windDir = direction
+        var conversionResult = degToCompass(weatherData.deg);
+        setDirection(conversionResult)
+    }
+   
     
+
+  
+    const windDir = direction
+    console.log('this is windDir: ', windDir)
+    console.log('this is wind direction by degrees: ', weatherData.deg)
     
      let transform;
         switch(windDir) {
@@ -70,7 +90,7 @@ export default function Data() {
                 transform = 'translate(15px, -3px)' 
             break;
             case "NNE": 
-                transform = 'translate(-4px, 36px)' 
+                transform = 'translate(38px, -2px)' 
             break;
             case "NW" : 
                   transform = 'translate(0px, 5px)'  
@@ -79,6 +99,9 @@ export default function Data() {
                 transform = 'translate(0px, 45px)' 
             break;
             case "SE": 
+                transform = 'translate(48px, 48px)' 
+            break;
+            case "ESE": 
                 transform = 'translate(48px, 48px)' 
             break;
             case "NE": 
@@ -105,14 +128,7 @@ export default function Data() {
         setLoc(event.target.value)
     }
 
-    function degToCompass(num){ 
-        while( num < 0 ) num += 360 ;
-        while( num >= 360 ) num -= 360 ; 
-        var val = Math.round( (num -11.25 ) / 22.5 ) ;
-        var arr = ["N","NNE","NE","ENE","E","ESE", "SE", 
-              "SSE","S","SSW","SW","WSW","W","WNW","NW","NNW"] ;
-        return arr[ Math.abs(val) ] ;
-    }
+  
 
     const circleStyle = {
         transition: 'all 1s ease',
