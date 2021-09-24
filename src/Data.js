@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import axios from 'axios'
 
 const key = process.env.REACT_APP_API_KEY
@@ -11,6 +11,8 @@ export default function Data() {
     const [direction, setDirection] = useState('')
     const [name, setname] = useState('new york')
     const [locFound, setLocFound] = useState(true)
+
+    const searchRef = useRef()
    
     useEffect(() => {
        getLoc()
@@ -42,11 +44,16 @@ export default function Data() {
     }
 
     const handleSearch = event => {
-        event.preventDefault();
-        event.persist();
+        event.preventDefault()
+        event.persist()
         getLoc()
         runDegreeConversion()
+        setLoc(searchRef.current.value)
      }
+
+     const updateSearch = searchRef => {
+        setLoc(searchRef.target.value)
+    }
 
     const windDir = direction
     
@@ -102,11 +109,6 @@ export default function Data() {
                 console.log('default')
         }    
     
-
-    const updateSearch = event => {
-        setLoc(event.target.value)
-    }
-
     function degToCompass(num){ 
         while( num < 0 ) num += 360 ;
         while( num >= 360 ) num -= 360 ; 
@@ -134,6 +136,7 @@ export default function Data() {
                 <p>Wind Data for {name}</p>
                 <form onSubmit={handleSearch}>
                     <input 
+                        ref={searchRef}
                         type="text"
                         onChange={updateSearch}
                         placeholder="Search for Location"
