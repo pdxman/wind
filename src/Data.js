@@ -19,11 +19,13 @@ export default function Data() {
        
     }, [locFound])
 
-    const getLoc = () => {
+    const getLoc = async () => {
         axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${loc}&appid=${key}`)
-        .then(response => {
-            setWeatherData(response.data.wind)
-            setname(response.data.name)
+        .then(async (response) => {
+            await setWeatherData(response.data.wind)
+            await setname(response.data.name)
+            await runDegreeConversion(response.data.wind.deg)
+            console.log(response.data)
         })
         
         .catch(err => {
@@ -38,16 +40,16 @@ export default function Data() {
         })
     }
     
-    const runDegreeConversion = () => {
-        var conversionResult = degToCompass(weatherData.deg);
-        setDirection(conversionResult)
+    const runDegreeConversion = async (deg) => {
+        var conversionResult = degToCompass(deg);
+        await setDirection(conversionResult)
     }
 
-    const handleSearch = event => {
+    const handleSearch = async (event) => {
         event.preventDefault()
         event.persist()
-        getLoc()
-        runDegreeConversion()
+        await getLoc();
+        // runDegreeConversion()
         setLoc(searchRef.current.value)
      }
 
