@@ -3,8 +3,6 @@ import axios from 'axios'
 
 const key = process.env.REACT_APP_API_KEY
 
-//testing branch two comment!
-
 export default function Data() {
     const [weatherData, setWeatherData] = useState([])  
     const [loc, setLoc] = useState('new york')
